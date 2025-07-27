@@ -23,27 +23,42 @@ const ImagePreview = (props) => {
             </div>
 
             {/* Enhanced Image Image */}
-            <div className="bg-white shadow-lg rounded-xl overflow-hidden">
-                <h2 className="text-xl font-semibold text-center bg-blue-800 text-white py-2">
-                    Enhanced Image
-                </h2>
+            {/* Enhanced Image Image */}
+<div className="bg-white shadow-lg rounded-xl overflow-hidden">
+    <h2 className="text-xl font-semibold text-center bg-blue-800 text-white py-2">
+        Enhanced Image
+    </h2>
 
-                {props.enhanced && !props.loading && (
-                    <img
-                        src={props.enhanced}
-                        alt=""
-                        className="w-full h-full object-cover"
-                    />
-                )}
-
-                {props.loading ? (
-                    <Loading />
-                ) : (
-                    <div className="flex items-center justify-center h-80 bg-gray-200">
-                        No Enhanced Image
-                    </div>
-                )}
+    {props.loading ? (
+        <Loading />
+    ) : props.enhanced ? (
+        <div>
+            <img
+                src={props.enhanced}
+                alt="Enhanced"
+                className="w-full h-full object-cover"
+            />
+            <div className="flex justify-center py-4">
+                <button
+                    onClick={() => {
+                        const link = document.createElement("a");
+                        link.href = props.enhanced;
+                        link.download = "enhanced-image.png"; // customize if needed
+                        link.click();
+                    }}
+                    className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
+                >
+                    Download Enhanced Image
+                </button>
             </div>
+        </div>
+    ) : (
+        <div className="flex items-center justify-center h-80 bg-gray-200">
+            No Enhanced Image
+        </div>
+    )}
+</div>
+
         </div>
     );
 };
